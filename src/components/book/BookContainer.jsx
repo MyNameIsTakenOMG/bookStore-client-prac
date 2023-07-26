@@ -15,7 +15,7 @@ export default function BookContainer() {
     dispatch(fetchAllBooks());
 
     return () => {};
-  }, []);
+  }, [dispatch]);
 
   const books = useSelector(bookListSelector);
   const error = useSelector(bookListErrorSelector);

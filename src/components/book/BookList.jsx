@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
+import BookListItem from './BookListItem';
 
 const propTypes = {
   books: PropTypes.arrayOf({
@@ -15,9 +16,9 @@ BookList.prototype = propTypes;
 
 export default function BookList({ books }) {
   return (
-    <Box>
+    <Box ml={5}>
       {books.map((book) => (
-        <div key={book.id}>{book.id}</div>
+        <BookListItem book={book} key={book.id} />
       ))}
     </Box>
   );
