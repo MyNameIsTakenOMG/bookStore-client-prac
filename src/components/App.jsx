@@ -1,7 +1,8 @@
 // import axios from 'axios';
 import { useEffect } from 'react';
-import './App.css';
-import baseURL from './config';
+import baseURL from '../config';
+import Layout from './layout/layout';
+import BookContainer from './book/BookContainer';
 
 function App() {
   // axios(`${baseURL}/api/v1/books`).then((response) => {
@@ -19,7 +20,11 @@ function App() {
     return () => {};
   }, []);
 
-  return <div className="App">my first component updated</div>;
+  return (
+    <Layout>
+      <BookContainer />
+    </Layout>
+  );
 }
 
 export default App;
