@@ -7,6 +7,7 @@ import {
   bookListSelector,
   fetchAllBooks,
 } from '../../redux-store/bookSlice';
+import BookList from './BookList';
 
 export default function BookContainer() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function BookContainer() {
     <Box sx={{ display: 'flex', justifyContent: 'center', flexFlow: 'row' }}>
       <BookFilter />
       <Box sx={{ width: '80%' }}>
-        here we will display all books.
+        <BookList books={books} />
         {books.length > 0 && books.length}
         {error && error.message}
       </Box>
