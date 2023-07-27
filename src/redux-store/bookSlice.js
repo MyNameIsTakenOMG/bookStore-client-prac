@@ -24,6 +24,7 @@ export const fetchAllBooks = createAsyncThunk(
 const bookSlice = createSlice({
   initialState: {
     books: [],
+    isLoading: false,
     error: null,
   },
   name: 'bookSlice',
@@ -31,11 +32,16 @@ const bookSlice = createSlice({
     listBooks: (state) => {},
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchAllBooks.pending, (state, action) => {
+      state.isLoading = true;
+    });
     builder.addCase(fetchAllBooks.fulfilled, (state, action) => {
       state.books = action.payload;
+      state.isLoading = false;
     });
     builder.addCase(fetchAllBooks.rejected, (state, action) => {
       state.error = action.payload;
+      state.isLoading = false;
     });
   },
 });
@@ -50,6 +56,10 @@ export const bookListSelector = createSelector(
 export const bookListErrorSelector = createSelector(
   (reduxState) => reduxState.entities.book,
   (book) => book.error
+);
+export const bookListLoadingSelector = createSelector(
+  (reduxState) => reduxState.entities.book,
+  (book) => book.isLoading
 );
 
 export default bookSlice.reducer;
