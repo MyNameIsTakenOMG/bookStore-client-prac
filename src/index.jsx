@@ -6,6 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux-store/store';
 import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('bookstore-token');
+    if (token) {
+      config.headers.setAuthorization(token);
+      return config;
+    }
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
