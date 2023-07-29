@@ -3,6 +3,7 @@ import BookContainer from './book/BookContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './user/Login';
 import { SnackbarProvider } from 'notistack';
+import Auth from './auth';
 
 function App() {
   return (
@@ -11,7 +12,14 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<BookContainer />} />
+            <Route
+              path="/"
+              element={
+                <Auth>
+                  <BookContainer />
+                </Auth>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

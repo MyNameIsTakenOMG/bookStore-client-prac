@@ -28,7 +28,7 @@ export const login = createAsyncThunk(
 
 const userSlice = createSlice({
   initialState: {
-    token: '',
+    token: localStorage.getItem('bookstore-token'),
     isLoading: false,
     error: null,
   },

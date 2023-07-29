@@ -10,6 +10,7 @@ import {
   userTokenSelector,
 } from '../../redux-store/userSlice';
 import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup
@@ -27,7 +28,7 @@ export default function Login() {
   const userLoading = useSelector(userLoadingSelector);
   const userToken = useSelector(userTokenSelector);
   const userError = useSelector(userErrorSelector);
-
+  const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -41,10 +42,10 @@ export default function Login() {
         variant: 'success',
         message: 'successfully logged in',
       });
+      navigate('/');
     }
-
     return () => {};
-  }, [third]);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
