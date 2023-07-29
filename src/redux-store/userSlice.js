@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 import baseUrl from '../config/index';
 
@@ -47,3 +51,17 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+
+// selector
+export const userTokenSelector = createSelector(
+  (reduxState) => reduxState.entities.user,
+  (user) => user.token
+);
+export const userLoadingSelector = createSelector(
+  (reduxState) => reduxState.entities.user,
+  (user) => user.isLoading
+);
+export const userErrorSelector = createSelector(
+  (reduxState) => reduxState.entities.user,
+  (user) => user.error
+);

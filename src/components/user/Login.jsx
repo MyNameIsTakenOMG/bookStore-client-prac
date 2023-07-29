@@ -1,9 +1,15 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
-import { login } from '../../redux-store/userSlice';
+import {
+  login,
+  userErrorSelector,
+  userLoadingSelector,
+  userTokenSelector,
+} from '../../redux-store/userSlice';
+import { useSnackbar } from 'notistack';
 
 const validationSchema = yup.object({
   email: yup
@@ -18,6 +24,27 @@ const validationSchema = yup.object({
 
 export default function Login() {
   const dispatch = useDispatch();
+  const userLoading = useSelector(userLoadingSelector);
+  const userToken = useSelector(userTokenSelector);
+  const userError = useSelector(userErrorSelector);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    if (userError !== null) {
+      enqueueSnackbar({
+        variant: 'error',
+        message: 'user credentials incorrect',
+      });
+    } else if (!userLoading && userToken !== '') {
+      enqueueSnackbar({
+        variant: 'success',
+        message: 'successfully logged in',
+      });
+    }
+
+    return () => {};
+  }, [third]);
 
   const formik = useFormik({
     initialValues: {
@@ -63,7 +90,7 @@ export default function Login() {
             helperText={formik.touched.password && formik.errors.password}
             error={formik.touched.password && Boolean(formik.errors.password)}
           />
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" disabled={userLoading}>
             login
           </Button>
         </Paper>
