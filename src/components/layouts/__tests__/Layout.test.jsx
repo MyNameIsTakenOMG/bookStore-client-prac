@@ -1,15 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Layout from '../Layout';
 
 describe('Layout', () => {
   it('should render layout component', () => {
-    const { getByText } = render(
-      <Layout>
-        <div>test component</div>
-      </Layout>
-    );
+    render(<Layout />);
 
-    expect(getByText('test component')).toBeDefined();
+    expect(screen.getByText('Book Store')).toBeDefined();
   });
 });

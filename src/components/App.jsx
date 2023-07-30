@@ -1,29 +1,30 @@
 import Layout from './layouts/Layout';
 import BookContainer from './book/BookContainer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Login from './user/Login';
 import { SnackbarProvider } from 'notistack';
-import Auth from './auth';
+import { useSelector } from 'react-redux';
+import { userTokenSelector } from '../redux-store/userSlice';
 
 function App() {
+  const userToken = useSelector(userTokenSelector);
+
   return (
+    // <BrowserRouter>
     <SnackbarProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/"
-              element={
-                <Auth>
-                  <BookContainer />
-                </Auth>
-              }
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              userToken ? <BookContainer /> : <Navigate to="/login" replace />
+            }
+          />
+        </Route>
+      </Routes>
     </SnackbarProvider>
+    // </BrowserRouter>
   );
 }
 
