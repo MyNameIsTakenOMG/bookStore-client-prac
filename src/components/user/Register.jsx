@@ -63,7 +63,7 @@ export default function Register() {
       navigate('/login');
     }
     return () => {};
-  }, [userError, userLoading, userId, enqueueSnackbar, navigator]);
+  }, [userError, userLoading, userId, enqueueSnackbar, navigate]);
 
   return (
     <Box sx={{ margin: 'auto', width: '40%' }}>
