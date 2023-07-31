@@ -1,4 +1,4 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, Paper, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,6 +58,9 @@ export default function Login() {
     },
   });
 
+  const handleRegister = () => {
+    navigator('/register');
+  };
   return (
     <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -94,6 +97,10 @@ export default function Login() {
           <Button type="submit" variant="contained" disabled={userLoading}>
             login
           </Button>
+          <br />
+          <Link component="button" variant="body2" onClick={handleRegister}>
+            Register
+          </Link>
         </Paper>
       </Box>
     </form>

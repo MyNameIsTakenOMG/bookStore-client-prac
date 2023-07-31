@@ -98,3 +98,7 @@ export const userErrorSelector = createSelector(
   (reduxState) => reduxState.entities.user,
   (user) => user.error
 );
+export const userIdSelector = createSelector(
+  (reduxState) => reduxState.entities.user,
+  (user) => user.userId
+);
