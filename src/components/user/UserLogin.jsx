@@ -23,13 +23,13 @@ const validationSchema = yup.object({
     .required('password is required'),
 });
 
-export default function Login() {
+export default function UserLogin() {
   const dispatch = useDispatch();
   const userLoading = useSelector(userLoadingSelector);
   const userToken = useSelector(userTokenSelector);
   const userError = useSelector(userErrorSelector);
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (userError !== null) {
@@ -45,7 +45,7 @@ export default function Login() {
       navigate('/');
     }
     return () => {};
-  }, []);
+  }, [userError, userLoading, userToken, navigate, enqueueSnackbar]);
 
   const formik = useFormik({
     initialValues: {
