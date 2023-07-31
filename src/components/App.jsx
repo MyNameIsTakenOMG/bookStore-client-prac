@@ -5,6 +5,7 @@ import Login from './user/Login';
 import { SnackbarProvider } from 'notistack';
 import { useSelector } from 'react-redux';
 import { userTokenSelector } from '../redux-store/userSlice';
+import Register from './user/Register';
 
 function App() {
   const userToken = useSelector(userTokenSelector);
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/"
             element={
